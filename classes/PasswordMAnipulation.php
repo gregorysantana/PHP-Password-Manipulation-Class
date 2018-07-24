@@ -7,8 +7,8 @@ class PasswordMAnipulation
 	public function generatePassword()
 	{
 		$salts = $this->salts(12);
-		$special_char1 = "~<>?|:'.,/\/";
-		$special_char2 = '!@#$%^&*()_+-*/+';
+		$special_char1 = "~<>?|:.(),";
+		$special_char2 = '!@#$%^&*_+-*+';
 		$pass = $special_char2.$salts.$special_char1;
 		return str_shuffle($pass);
 	}
