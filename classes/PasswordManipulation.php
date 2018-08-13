@@ -1,6 +1,6 @@
 <?php
 
-class PasswordMAnipulation
+class PasswordManipulation
 {
     const PASS_MIN_LEN = 8;
 
@@ -21,7 +21,15 @@ class PasswordMAnipulation
 
     public function hashPassword($password)
     {
-        return password_hash($password, PASSWORD_ARGON2I);
+        if (\defined('PASSWORD_ARGON2I')) {
+            $algorithm = PASSWORD_ARGON2I;
+        } elseif (\define('PASSWORD_BCRYPT')) {
+            $algorithm = PASSWORD_BCRYPT;
+        } else {
+            $algorithm = PASSWORD_DEFAULT;
+        }
+
+        return password_hash($password, $algorithm);
     }
 
     public function isValid($password)
